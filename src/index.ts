@@ -6,15 +6,23 @@ program
     .option("-v, --version", "Print the CurlGPT version")
     .option("-h, --help", "Get help");
 
-const isOption = (input: string[]) => {
+const handleOption = (input: string[]) => {
     program.parseOptions(input);
 
     const options = program.opts();
-    const t = program.action;
 
-    if (options.version) console.log("Version: 0.0.1");
-    else if (options.help) program.help();
-    else if (input.length < 3 || input[2].startsWith("-")) program.help();
+    if (options.version) {
+        console.log("Version: 0.0.1");
+        process.exit(0);
+    } else if (options.help || input.length < 3 || input[2].startsWith("-")) {
+        program.help();
+    }
 };
+if (process.argv.length < 3 || process.argv[2].startsWith("-"))
+    handleOption(process.argv);
 
-isOption(process.argv);
+program.description("Enter the prompt for CurlGPT").action(() => {
+    console.log("Prompt:", program.args.join(" "));
+});
+
+program.parse(process.argv);
