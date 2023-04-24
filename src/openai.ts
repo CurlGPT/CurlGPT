@@ -15,9 +15,7 @@ const getCommand = async (prompt: string) => {
         messages: [
             {
                 role: "user",
-                content: `Task: generate shell command on ${prompt}
-                            Topic: command line tool
-                            Length: 1 line`,
+                content: `Topic: command line tool. Length: 1 line. Task: generate shell command on ${prompt}`,
             },
         ],
         temperature: 0,
