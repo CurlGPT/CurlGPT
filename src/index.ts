@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
+import getCommand from "./openai";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
@@ -21,8 +22,9 @@ const handleOption = (input: string[]) => {
 if (process.argv.length < 3 || process.argv[2].startsWith("-"))
     handleOption(process.argv);
 
-program.description("Enter the prompt for CurlGPT").action(() => {
-    console.log("Prompt:", program.args.join(" "));
+program.description("Enter the prompt for CurlGPT").action(async () => {
+    const command = await getCommand(program.args.join(" "));
+    console.log(command);
 });
 
 program.parse(process.argv);
