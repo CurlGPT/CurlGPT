@@ -18,8 +18,6 @@ const getCommand = async (prompt: string) => {
                 content: `Topic: command line tool. Length: 1 line. Task: generate shell command on ${prompt}`,
             },
         ],
-        temperature: 0,
-        max_tokens: 50,
     });
     if (command.data.choices[0].message) {
         return command.data.choices[0].message.content;
