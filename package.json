@@ -1,6 +1,6 @@
 {
     "name": "curlgpt",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "ChatGPT in your favourite terminal",
     "main": "dist/index.js",
     "bin": {
