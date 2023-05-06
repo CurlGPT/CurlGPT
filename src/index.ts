@@ -15,11 +15,11 @@ const handleOption = (input: string[]) => {
     if (options.version) {
         console.log("Version: 0.0.1");
         process.exit(0);
-    } else if (options.help || input.length < 3 || input[2].startsWith("-")) {
+    } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();
     }
 };
-if (process.argv.length < 3 || process.argv[2].startsWith("-"))
+if (process.argv.length < 3 || process.argv[2]?.startsWith("-"))
     handleOption(process.argv);
 
 program.description("Enter the prompt for CurlGPT").action(async () => {

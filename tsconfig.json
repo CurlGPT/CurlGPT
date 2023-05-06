@@ -12,7 +12,9 @@
         "checkJs": false,
         "resolveJsonModule": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "noUncheckedIndexedAccess": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
