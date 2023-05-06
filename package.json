@@ -3,11 +3,14 @@
     "version": "0.0.1",
     "description": "ChatGPT in your favourite terminal",
     "main": "dist/index.js",
-    "bin": "./dist/index.js",
+    "bin": {
+        "curlgpt": "./dist/index.js"
+    },
     "type": "module",
     "scripts": {
         "start": "tsx src/index.ts",
-        "build": "tsc -b",
+        "build": "tsup src/",
+        "lint": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -31,6 +34,7 @@
         "@types/node": "^18.15.13",
         "dotenv": "^16.0.3",
         "prettier": "^2.8.7",
+        "tsup": "^6.7.0",
         "tsx": "^3.12.6",
         "typescript": "^5.0.4"
     },

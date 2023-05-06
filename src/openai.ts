@@ -19,7 +19,7 @@ const getCommand = async (prompt: string) => {
             },
         ],
     });
-    if (command.data.choices[0].message) {
+    if (command.data.choices[0]?.message) {
         return command.data.choices[0].message.content;
     }
     return command.data;
