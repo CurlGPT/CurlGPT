@@ -1,14 +1,14 @@
 {
     "name": "curlgpt",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "ChatGPT in your favourite terminal",
-    "main": "dist/index.js",
+    "main": "dist/index.cjs",
     "bin": {
-        "curlgpt": "./dist/index.js"
+        "curlgpt": "./dist/index.cjs"
     },
     "type": "module",
     "scripts": {
-        "start": "tsx src/index.ts",
+        "start": "./dist/index.cjs",
         "build": "tsup src/",
         "lint": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
