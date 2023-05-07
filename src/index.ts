@@ -2,6 +2,9 @@
 
 import { program } from "commander";
 import getCommand from "./openai";
+import fs from "fs";
+
+const configFilePath = "/Users/lokeswaranaruljothy/Desktop/curlgpt.json";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
@@ -11,16 +14,15 @@ program
 const handleOption = (input: string[]) => {
     program.parseOptions(input);
 
-    // console.log(program);
-
     const options = program.opts();
 
     if (options.version) {
         console.log("Version: 0.0.1");
         process.exit(0);
     } else if (options.apikey) {
-        const value = program.getOptionValue("apikey");
-        console.log(value);
+        const apikey = program.getOptionValue("apikey");
+        const config = { apikey };
+        fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();
