@@ -2,18 +2,15 @@ import os from "os";
 import fs from "fs";
 import path from "path";
 import { Configuration, OpenAIApi } from "openai";
-
-const homeDir = os.homedir();
-const configFilePath = path.join(homeDir, ".curlgpt");
-const configFileName = "config.json";
+import { getApiKey } from "./config";
 
 const getCommand = async (prompt: string) => {
-    const configData = fs.readFileSync(
-        configFilePath + "/" + configFileName,
-        "utf-8"
-    );
-    const config = JSON.parse(configData);
-    const apiKey = config.apiKey;
+    let apiKey;
+    try {
+        apiKey = getApiKey();
+    } catch (error) {
+        throw error;
+    }
 
     const configuration = new Configuration({ apiKey });
 
