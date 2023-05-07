@@ -5,15 +5,22 @@ import getCommand from "./openai";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
-    .option("-h, --help", "Get help");
+    .option("-h, --help", "Get help")
+    .option("-a, --apikey <apikey>", "Set Openai's Api Key");
 
 const handleOption = (input: string[]) => {
     program.parseOptions(input);
+
+    // console.log(program);
 
     const options = program.opts();
 
     if (options.version) {
         console.log("Version: 0.0.1");
+        process.exit(0);
+    } else if (options.apikey) {
+        const value = program.getOptionValue("apikey");
+        console.log(value);
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();

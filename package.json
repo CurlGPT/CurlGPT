@@ -8,7 +8,7 @@
     },
     "type": "module",
     "scripts": {
-        "start": "./dist/index.cjs",
+        "start": "tsx src/index.ts",
         "build": "tsup src/",
         "lint": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
