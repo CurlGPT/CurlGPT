@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
+import os from "os";
+import fs from "fs";
+import path from "path";
 import { program } from "commander";
 import getCommand from "./openai";
-import fs from "fs";
 
-const configFilePath = "/Users/lokeswaranaruljothy/Desktop/curlgpt.json";
+const homeDir = os.homedir();
+const configFilePath = path.join(homeDir, ".curlgpt");
+const configFileName = "config.json";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
     .option("-h, --help", "Get help")
-    .option("-a, --apikey <apikey>", "Set Openai's Api Key");
+    .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key");
 
 const handleOption = (input: string[]) => {
     program.parseOptions(input);
@@ -19,10 +23,16 @@ const handleOption = (input: string[]) => {
     if (options.version) {
         console.log("Version: 0.0.1");
         process.exit(0);
-    } else if (options.apikey) {
-        const apikey = program.getOptionValue("apikey");
-        const config = { apikey };
-        fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
+    } else if (options.setApiKey) {
+        const apiKey = program.getOptionValue("setApiKey");
+        const config = { apiKey };
+        if (!fs.existsSync(configFilePath)) {
+            fs.mkdirSync(configFilePath, { recursive: true });
+        }
+        fs.writeFileSync(
+            configFilePath + "/" + configFileName,
+            JSON.stringify(config, null, 2)
+        );
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();
