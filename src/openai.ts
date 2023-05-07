@@ -1,12 +1,18 @@
+import os from "os";
+import fs from "fs";
+import path from "path";
 import { Configuration, OpenAIApi } from "openai";
-import * as dotenv from "dotenv";
+import { getApiKey } from "./config";
 
 const getCommand = async (prompt: string) => {
-    dotenv.config();
+    let apiKey;
+    try {
+        apiKey = getApiKey();
+    } catch (error) {
+        throw error;
+    }
 
-    const configuration = new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
-    });
+    const configuration = new Configuration({ apiKey });
 
     const openai = new OpenAIApi(configuration);
 
