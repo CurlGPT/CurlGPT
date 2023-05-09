@@ -25,7 +25,9 @@ const handleOption = (input: string[]) => {
             setApiKey(apiKey);
         } catch (error: any) {
             console.error(chalk.red.bold("Error:"), chalk.red(error.message));
+            process.exit(1);
         }
+        console.log(chalk.green("🎉 Successfully set the API Key!"));
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();

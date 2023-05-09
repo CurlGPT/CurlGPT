@@ -1,6 +1,7 @@
 import os from "os";
 import fs from "fs";
 import path from "path";
+import chalk from "chalk";
 
 const homeDir = os.homedir();
 const configFolderPath = path.join(homeDir, ".curlgpt");
@@ -8,7 +9,9 @@ const configFileName = "config.json";
 const configFilePath = path.join(configFolderPath, configFileName);
 
 const apiKeyNotFoundError = new Error(
-    `Openai's Api Key is not found. Please create an API Key from chalk.red.underline(https://platform.openai.com/) and set the API Key with \`curlgpt --set-apiKey <apiKey>\` command`
+    `Openai's Api Key is not found. Please create an API Key from ${chalk.red.underline(
+        "https://platform.openai.com/"
+    )} and set the API Key with \`curlgpt --set-apiKey <apiKey>\` command`
 );
 
 function isValidApiKey(apiKey: string): boolean {
