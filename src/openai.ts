@@ -1,5 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
 import { getApiKey } from "./config";
+import { string } from "yup";
 
 const getCommand = async (prompt: string) => {
     let apiKey;
@@ -25,6 +26,5 @@ const getCommand = async (prompt: string) => {
     if (command.data.choices[0]?.message) {
         return command.data.choices[0].message.content;
     }
-    return command.data;
 };
 export default getCommand;

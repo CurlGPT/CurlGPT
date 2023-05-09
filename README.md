@@ -6,6 +6,7 @@ CurlGPT is a command-line tool that brings the power of OpenAI's ChatGPT to your
 
 -   Get the command for the specified prompt ChatGPT on your terminal.
 -   Get accurate command for the prompt
+-   Auto Copy the outputted command to clipboard
 -   Easy-to-use command-line interface
 -   Support for setting an API key for accessing OpenAI's API 🔑
 
@@ -58,10 +59,12 @@ Contributions are welcome! If you find a bug, have a feature request, or want to
     yarn
     ```
 5. Test the tool by running the following command to print the CurlGPT version
-   `shell
- yarn start -v
- `
-    > Note: you will require OpenAI's API Key to test the prompt in local
+
+    ```shell
+        yarn start -v
+    ```
+
+> Note: you will require OpenAI's API Key to test the prompt in local
 
 ## License 📝
 
