@@ -5,6 +5,8 @@ import getCommand from "./openai";
 import { setApiKey } from "./config";
 import chalk from "chalk";
 import helpMessage from "./help";
+import clipboard from "clipboardy";
+import { string } from "yup";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
@@ -17,7 +19,7 @@ const handleOption = (input: string[]) => {
     const options = program.opts();
 
     if (options.version) {
-        console.log(chalk.green("Version: 0.1.2"));
+        console.log(chalk.green("Version: 0.2.0"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");
@@ -39,7 +41,10 @@ if (process.argv.length < 3 || process.argv[2]?.startsWith("-"))
 program.description("Enter the prompt for CurlGPT").action(async () => {
     try {
         const command = await getCommand(program.args.join(" "));
-        console.log(command);
+        if (command) {
+            clipboard.writeSync(command);
+            console.log(command);
+        }
     } catch (error: any) {
         console.error(chalk.red.bold("Error:"), chalk.red(error.message));
     }
