@@ -1,35 +1,33 @@
 #!/usr/bin/env node
 
-import os from "os";
-import path from "path";
 import { program } from "commander";
 import getCommand from "./openai";
 import { setApiKey } from "./config";
 import chalk from "chalk";
-
-const homeDir = os.homedir();
-const configFilePath = path.join(homeDir, ".curlgpt");
-const configFileName = "config.json";
-
-program.version("0.0.4");
+import helpMessage from "./help";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
-    .option("-h, --help", "Get help")
-    .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key");
+    .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key")
+    .configureHelp({ formatHelp: (cmd, helperOptions) => helpMessage });
 
 const handleOption = (input: string[]) => {
     program.parseOptions(input);
 
     const options = program.opts();
 
-    if (options.setApiKey) {
+    if (options.version) {
+        console.log(chalk.green("Version: 0.1.2"));
+        process.exit(0);
+    } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");
         try {
             setApiKey(apiKey);
         } catch (error: any) {
             console.error(chalk.red.bold("Error:"), chalk.red(error.message));
+            process.exit(1);
         }
+        console.log(chalk.green("🎉 Successfully set the API Key!"));
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();
