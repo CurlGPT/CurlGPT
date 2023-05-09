@@ -1,6 +1,3 @@
-import os from "os";
-import fs from "fs";
-import path from "path";
 import { Configuration, OpenAIApi } from "openai";
 import { getApiKey } from "./config";
 
