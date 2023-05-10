@@ -17,6 +17,6 @@ class Curlgpt < Formula
 
   test do
     version = shell_output("#{bin}/curlgpt --version")
-    assert_match "Version: 0.1.2", version
+    assert_match "Version: 0.2.1", version
   end
 end
