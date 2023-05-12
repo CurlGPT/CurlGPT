@@ -1,0 +1,10 @@
+{
+    "entryPoints": ["src/index.ts"],
+    "format": ["cjs", "esm"],
+    "minify": true,
+    "treeShake": true,
+    "dts": true,
+    "external": [],
+    "tsconfig": "tsconfig.json",
+    "target": "ES2020"
+}

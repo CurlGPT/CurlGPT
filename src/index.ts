@@ -6,12 +6,11 @@ import { setApiKey } from "./config";
 import chalk from "chalk";
 import helpMessage from "./help";
 import clipboard from "clipboardy";
-import { string } from "yup";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
     .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key")
-    .configureHelp({ formatHelp: (cmd, helperOptions) => helpMessage });
+    .configureHelp({ formatHelp: () => helpMessage });
 
 const handleOption = (input: string[]) => {
     program.parseOptions(input);
@@ -19,7 +18,7 @@ const handleOption = (input: string[]) => {
     const options = program.opts();
 
     if (options.version) {
-        console.log(chalk.green("Version: 0.2.1"));
+        console.log(chalk.green("Version: 0.2.5"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");

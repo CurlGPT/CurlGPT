@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es2017",
+        "target": "ES2020",
         "module": "esnext",
         "moduleResolution": "node",
         "rootDir": "src",
@@ -13,9 +13,13 @@
         "resolveJsonModule": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "noUncheckedIndexedAccess": true
+        "declaration": true,
+        "noImplicitAny": true,
+        "typeRoots": ["node_modules/@types"]
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "tscOptions": {
+        "emit": "esnext"
+    }
 }

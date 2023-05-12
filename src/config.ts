@@ -1,6 +1,6 @@
-import os from "os";
-import fs from "fs";
-import path from "path";
+import * as os from "os";
+import * as fs from "fs";
+import * as path from "path";
 import chalk from "chalk";
 
 const homeDir = os.homedir();
