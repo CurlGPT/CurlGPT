@@ -1,10 +1,10 @@
 import { Configuration, OpenAIApi } from "openai";
-import { getApiKey } from "./config";
+import { getApiKey } from "./configuration";
 
 const getCommand = async (prompt: string) => {
     let apiKey;
     try {
-        apiKey = getApiKey();
+        apiKey = await getApiKey();
     } catch (error) {
         throw error;
     }

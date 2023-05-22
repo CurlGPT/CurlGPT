@@ -2,7 +2,7 @@
 
 import { program } from "commander";
 import getCommand from "./openai";
-import { setApiKey } from "./config";
+import { setApiKey, setTrial } from "./configuration";
 import chalk from "chalk";
 import helpMessage from "./help";
 import clipboard from "clipboardy";
@@ -10,9 +10,10 @@ import clipboard from "clipboardy";
 program
     .option("-v, --version", "Print the CurlGPT version")
     .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key")
+    .option("-t, --trial", "Setup free trial")
     .configureHelp({ formatHelp: () => helpMessage });
 
-const handleOption = (input: string[]) => {
+const handleOption = async (input: string[]) => {
     program.parseOptions(input);
 
     const options = program.opts();
@@ -29,6 +30,19 @@ const handleOption = (input: string[]) => {
             process.exit(1);
         }
         console.log(chalk.green("🎉 Successfully set the API Key!"));
+        process.exit(0);
+    } else if (options.trial) {
+        try {
+            setTrial();
+        } catch (error: any) {
+            console.error(chalk.red.bold("Error:"), chalk.red(error.message));
+            process.exit(1);
+        }
+        console.log(
+            chalk.green(
+                "🎉 Successfully started the trial version!\nYou have a total of 10 free prompts to use."
+            )
+        );
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();
