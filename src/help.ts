@@ -6,7 +6,7 @@ ${chalk.bgMagenta.bold(`
         CurlGPT - ChatGPT in your favourite terminal 🤖        
 ===============================================================`)}
 
-Usage: curlgpt ${chalk.green("[prompt]")} ${chalk.yellow("[option]")}
+Usage: curlgpt ${chalk.green("[prompt]")} / ${chalk.yellow("[option]")}
 
 ${chalk.green("📝 Prompt")} - Enter the prompt for which the command is needed.
 
@@ -22,7 +22,11 @@ ${chalk.yellow("Options:")}
     📌 -v, --version               Print the CurlGPT version
     ❓ -h, --help                  Get help
     🔑 -s, --set-apiKey <apiKey>   Set Openai's Api Key
+    💭 -f, --feedback              Get the feeback link
 
+Please feel free to leave a ⭐️ on the Github repository(${chalk.blue.underline(
+    "https://github.com/CurlGPT/CurlGPT"
+)}) if you appreciated CurlGPT.
 `;
 
 export default helpMessage;
