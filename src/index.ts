@@ -40,7 +40,7 @@ const handleOption = async (input: string[]) => {
         }
         console.log(
             chalk.green(
-                "🎉 Successfully started the trial version!\nYou have a total of 10 free prompts to use."
+                "🎉 Successfully started your trial version!\nYou have a total of 10 free prompts to use."
             )
         );
         process.exit(0);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { APIKeyRetrievalError } from "./error";
 
 interface Configuration {
     trial: boolean;
@@ -38,7 +39,7 @@ async function getVaultSecrets(configuration: Configuration): Promise<string> {
 
         return apiKey;
     } catch (error: any) {
-        throw new Error(`Error retrieving API Key: ${error.message}`);
+        throw APIKeyRetrievalError(error.message);
     }
 }
 
