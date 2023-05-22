@@ -27,29 +27,37 @@ const isValidApiKey = (apiKey: string): boolean => {
 };
 
 export const setTrial = () => {
+    let configuration;
+    if (!fs.existsSync(configFilePath)) {
+        fs.mkdirSync(configFolderPath, { recursive: true });
+
+        configuration = {
+            trial: true,
+            limit: 10,
+            vaultUrl,
+            vaultNamespace,
+            vaultRoleId,
+            vaultSecretId,
+            apiKey: null,
+        };
+    }
     if (fs.existsSync(configFilePath)) {
         const configData = fs.readFileSync(configFilePath, "utf-8");
 
         if (configData !== "") {
-            const configuration = JSON.parse(configData);
-            if (configuration.trial === true) {
+            const exisitingConfiguration = JSON.parse(configData);
+            if (exisitingConfiguration.trial === true) {
                 throw new Error(
-                    `Your trial version has already been activated. You are left with ${configuration.limit} free prompts`
+                    `Your trial version has already been activated. You are left with ${exisitingConfiguration.limit} free prompts`
                 );
+            } else {
+                configuration = {
+                    ...exisitingConfiguration,
+                    trial: true,
+                };
             }
         }
     }
-    if (!fs.existsSync(configFolderPath)) {
-        fs.mkdirSync(configFolderPath, { recursive: true });
-    }
-    const configuration = {
-        trial: true,
-        limit: 10,
-        vaultUrl,
-        vaultNamespace,
-        vaultRoleId,
-        vaultSecretId,
-    };
     fs.writeFileSync(configFilePath, JSON.stringify(configuration, null, 2));
 };
 
@@ -57,10 +65,24 @@ export const setApiKey = (apiKey: string) => {
     if (!isValidApiKey(apiKey)) {
         throw new Error("Invalid Api Key");
     }
-    if (!fs.existsSync(configFolderPath)) {
+    let configuration;
+    if (!fs.existsSync(configFilePath)) {
         fs.mkdirSync(configFolderPath, { recursive: true });
+
+        configuration = {
+            trial: false,
+            limit: 10,
+            vaultUrl,
+            vaultNamespace,
+            vaultRoleId,
+            vaultSecretId,
+            apiKey,
+        };
+    } else {
+        const configData = fs.readFileSync(configFilePath, "utf-8");
+        const exisitingConfiguration = JSON.parse(configData);
+        configuration = { ...exisitingConfiguration, trial: false, apiKey };
     }
-    const configuration = { apiKey };
     fs.writeFileSync(configFilePath, JSON.stringify(configuration, null, 2));
 };
 
