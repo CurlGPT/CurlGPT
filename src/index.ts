@@ -19,7 +19,7 @@ const handleOption = async (input: string[]) => {
     const options = program.opts();
 
     if (options.version) {
-        console.log(chalk.green("Version: 0.3.0"));
+        console.log(chalk.green("Version: 0.3.1"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");
@@ -33,16 +33,16 @@ const handleOption = async (input: string[]) => {
         process.exit(0);
     } else if (options.trial) {
         try {
-            setTrial();
+            const limit = setTrial();
+            console.log(
+                chalk.green(
+                    `🎉 Successfully started your trial version!\nYou have a total of ${limit} free prompts to use.`
+                )
+            );
         } catch (error: any) {
             console.error(chalk.red.bold("Error:"), chalk.red(error.message));
             process.exit(1);
         }
-        console.log(
-            chalk.green(
-                "🎉 Successfully started your trial version!\nYou have a total of 10 free prompts to use."
-            )
-        );
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();

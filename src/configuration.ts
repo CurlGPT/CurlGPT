@@ -54,6 +54,7 @@ export const setTrial = () => {
         }
     }
     fs.writeFileSync(configFilePath, JSON.stringify(configuration, null, 4));
+    return configuration.limit;
 };
 
 export const setApiKey = (apiKey: string) => {
