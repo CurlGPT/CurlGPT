@@ -19,7 +19,7 @@ const handleOption = async (input: string[]) => {
     const options = program.opts();
 
     if (options.version) {
-        console.log(chalk.green("Version: 0.3.1"));
+        console.log(chalk.green("Version: 0.3.2"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");

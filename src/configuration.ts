@@ -33,7 +33,7 @@ export const setTrial = () => {
 
         configuration = {
             trial: true,
-            limit: 10,
+            limit: 30,
             vaultUrl,
             vaultNamespace,
             vaultRoleId,
