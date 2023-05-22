@@ -66,7 +66,7 @@ export const setApiKey = (apiKey: string) => {
 
         configuration = {
             trial: false,
-            limit: 10,
+            limit: 30,
             vaultUrl,
             vaultNamespace,
             vaultRoleId,
