@@ -6,6 +6,7 @@ import { setApiKey, setTrial } from "./configuration";
 import chalk from "chalk";
 import helpMessage from "./help";
 import clipboard from "clipboardy";
+import postData from "./analytics";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
@@ -20,12 +21,14 @@ const handleOption = async (input: string[]) => {
     const options = program.opts();
 
     if (options.version) {
-        console.log(chalk.green("Version: 0.3.3"));
+        console.log(chalk.green("Version: 0.4.0"));
+        await postData("Version");
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");
         try {
             setApiKey(apiKey);
+            await postData("APIKey");
         } catch (error: any) {
             console.error(chalk.red.bold("Error:"), chalk.red(error.message));
             process.exit(1);
@@ -40,6 +43,7 @@ const handleOption = async (input: string[]) => {
                     `🎉 Successfully started your trial version!\nYou have a total of ${limit} free prompts to use.`
                 )
             );
+            await postData("Trial");
         } catch (error: any) {
             console.error(chalk.red.bold("Error:"), chalk.red(error.message));
             process.exit(1);
@@ -51,8 +55,10 @@ const handleOption = async (input: string[]) => {
                 "https://forms.gle/AQpsMxTar7FpdouT7"
             )}`
         );
+        await postData("Feedback");
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
+        await postData("Help");
         program.help();
     }
 };
@@ -61,11 +67,14 @@ if (process.argv.length < 3 || process.argv[2]?.startsWith("-"))
 
 program.description("Enter the prompt for CurlGPT").action(async () => {
     try {
-        const command = await getCommand(program.args.join(" "));
+        const prompt = program.args.join(" ");
+        if (!prompt) return;
+        const command = await getCommand(prompt);
         if (command) {
             clipboard.writeSync(command);
             console.log(command);
         }
+        await postData("Prompt");
     } catch (error: any) {
         console.error(chalk.red.bold("Error:"), chalk.red(error.message));
     }

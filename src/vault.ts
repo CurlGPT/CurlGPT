@@ -39,7 +39,7 @@ async function getVaultSecrets(configuration: Configuration): Promise<string> {
 
         return apiKey;
     } catch (error: any) {
-        throw APIKeyRetrievalError(error.message);
+        throw APIKeyRetrievalError();
     }
 }
 

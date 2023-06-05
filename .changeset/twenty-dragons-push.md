@@ -1,0 +1,5 @@
+---
+"curlgpt": minor
+---
+
+add analystics

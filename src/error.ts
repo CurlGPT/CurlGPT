@@ -20,5 +20,5 @@ export const TrialLimitExceededError = () =>
     new Error(
         "Free trial limit exceeded. Please upgrade your subscription to continue CurlGPT"
     );
-export const APIKeyRetrievalError = (message: string) =>
-    new Error(`Unable retrieving API Key: ${message}`);
+export const APIKeyRetrievalError = () =>
+    new Error(`Unable to reach the server.`);
