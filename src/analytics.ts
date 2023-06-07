@@ -2,7 +2,7 @@ import axios from "axios";
 import * as os from "os";
 import { randomUUID } from "crypto";
 
-export default async function postData(eventName: string) {
+export default async function sendEvent(eventName: string) {
     let username, platform, ip, id;
     try {
         username = os.userInfo().username || "unknown";

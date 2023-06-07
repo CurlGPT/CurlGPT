@@ -7,7 +7,7 @@ import {
     ApiKeyNotFoundError,
     InvalidAPIKeyError,
     TrialAlreadyActivatedError,
-} from "./error";
+} from "./exception";
 
 const homeDir = os.homedir();
 const configFolderPath = path.join(homeDir, ".curlgpt");
@@ -44,7 +44,7 @@ export const setTrial = () => {
 
         const exisitingConfiguration = JSON.parse(configData);
         if (exisitingConfiguration.trial === true) {
-            throw TrialAlreadyActivatedError(exisitingConfiguration.limit);
+            throw new TrialAlreadyActivatedError(exisitingConfiguration.limit);
         } else {
             configuration = {
                 ...exisitingConfiguration,
@@ -58,7 +58,7 @@ export const setTrial = () => {
 
 export const setApiKey = (apiKey: string) => {
     if (!isValidApiKey(apiKey)) {
-        throw InvalidAPIKeyError();
+        throw new InvalidAPIKeyError();
     }
     let configuration;
     if (!fs.existsSync(configFilePath)) {
@@ -83,28 +83,28 @@ export const setApiKey = (apiKey: string) => {
 
 export const getApiKey = async () => {
     if (!fs.existsSync(configFilePath)) {
-        throw ApiKeyNotFoundError();
+        throw new ApiKeyNotFoundError();
     }
 
     try {
         const configData = fs.readFileSync(configFilePath, "utf-8");
 
         if (configData === "") {
-            throw ApiKeyNotFoundError();
+            throw new ApiKeyNotFoundError();
         }
 
         const configuration = JSON.parse(configData);
 
         if (configuration.trial === true) {
             if (configuration.limit <= 0) {
-                throw TrialLimitExceededError();
+                throw new TrialLimitExceededError();
             }
             const apiKey = await getVaultSecrets(configuration);
             decrementLimit();
             return apiKey;
         }
         if (!configuration || typeof configuration.apiKey !== "string") {
-            throw ApiKeyNotFoundError();
+            throw new ApiKeyNotFoundError();
         }
 
         return configuration.apiKey;
