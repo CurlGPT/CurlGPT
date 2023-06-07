@@ -7,7 +7,7 @@
 <p align="center">CurlGPT is a command-line tool that brings the power of OpenAI's ChatGPT to your favorite terminal. It allows you to type the prompt and the command line will output the proper command. 💬🚀</p>
 
 <video width="640" height="380" controls>
-  <source src="https://github.com/CurlGPT/CurlGPT/assets/74011196/888fc421-f1d2-49f2-8a45-1fe2e43dcdbd" type="video/mp4">
+  <source src="https://github.com/CurlGPT/CurlGPT/assets/74011196/888fc421-f1d2-49f2-8a45-1fe2e43dcdbd.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
