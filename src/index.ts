@@ -9,7 +9,7 @@ import clipboard from "clipboardy";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
-    .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key")
+    .option("-s, --set-apiKey <apiKey>", "Set CurlGPT's Api Key")
     .option("-f, --feedback", "Get the feeback link")
     .configureHelp({ formatHelp: () => helpMessage });
 
@@ -17,9 +17,8 @@ const handleOption = async (input: string[]) => {
     program.parseOptions(input);
 
     const options = program.opts();
-
     if (options.version) {
-        console.log(chalk.green("Version: 0.4.1"));
+        console.log(chalk.green("Version: 0.5.1"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");

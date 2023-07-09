@@ -21,7 +21,7 @@ ${chalk.yellow("Options:")}
        
     📌 -v, --version               Print the CurlGPT version
     ❓ -h, --help                  Get help
-    🔑 -s, --set-apiKey <apiKey>   Set Openai's Api Key
+    🔑 -s, --set-apiKey <apiKey>   Set CurlGPT's Api Key
     💭 -f, --feedback              Get the feeback link
 
 Please feel free to leave a ⭐️ on the Github repository(${chalk.blue.underline(

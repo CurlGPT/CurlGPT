@@ -1,5 +1,6 @@
 import { getApiKey } from "./configuration";
 import axios from "axios";
+import ora from "ora";
 
 const getCommand = async (prompt: string) => {
     let apiKey;
@@ -9,21 +10,29 @@ const getCommand = async (prompt: string) => {
         throw error;
     }
 
+    const spinner = ora("Getting API Key").start();
+    spinner.spinner = "earth";
+
     const headers = {
         apikey: apiKey,
         "Content-Type": "application/json",
     };
 
     const body = { prompt };
-    const response = await axios.post(
-        `https://curlgpt.vercel.app/api/v1/prompt`,
-        body,
-        { headers }
-    );
 
-    const { data } = response;
-    if (data.error) throw new Error(data.error);
+    spinner.text = "Generating command...";
 
-    return data.command;
+    try {
+        const response = await axios.post(
+            `https://curlgpt.vercel.app/api/v1/prompt`,
+            body,
+            { headers }
+        );
+        spinner.stop();
+        return response.data.command;
+    } catch (error: any) {
+        spinner.stop();
+        throw new Error(error.response.data.error);
+    }
 };
 export default getCommand;
