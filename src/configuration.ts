@@ -21,7 +21,7 @@ const vaultRoleId = "664f4c0e-3870-cf35-9cba-e64d1019ed85";
 const vaultSecretId = "91a1673b-27fa-be44-6c10-3d7d3d10e204";
 
 const isValidApiKey = (apiKey: string): boolean => {
-    const apiKeyRegex = /^sk-[a-zA-Z0-9]{48}$/;
+    const apiKeyRegex = /^la-[a-zA-Z0-9]{30}$/;
     return apiKeyRegex.test(apiKey);
 };
 

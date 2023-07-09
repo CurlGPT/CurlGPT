@@ -34,20 +34,6 @@ const handleOption = async (input: string[]) => {
         }
         console.log(chalk.green("🎉 Successfully set the API Key!"));
         process.exit(0);
-    } else if (options.trial) {
-        try {
-            const limit = setTrial();
-            console.log(
-                chalk.green(
-                    `🎉 Successfully started your trial version!\nYou have a total of ${limit} free prompts to use.`
-                )
-            );
-            await sendEvent("Trial");
-        } catch (error: any) {
-            console.error(chalk.red.bold("Error:"), chalk.red(error.message));
-            process.exit(1);
-        }
-        process.exit(0);
     } else if (options.feedback) {
         console.log(
             `Use the following link to provide your feedback: ${chalk.blue.underline(
