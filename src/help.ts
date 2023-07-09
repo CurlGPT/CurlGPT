@@ -21,7 +21,6 @@ ${chalk.yellow("Options:")}
        
     📌 -v, --version               Print the CurlGPT version
     ❓ -h, --help                  Get help
-    🧪 -t, --trial                 Set up a trial with up to 30 prompts for free
     🔑 -s, --set-apiKey <apiKey>   Set Openai's Api Key
     💭 -f, --feedback              Get the feeback link
 

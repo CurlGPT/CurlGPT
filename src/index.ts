@@ -2,7 +2,7 @@
 
 import { program } from "commander";
 import getCommand from "./openai";
-import { setApiKey, setTrial } from "./configuration";
+import { setApiKey } from "./configuration";
 import chalk from "chalk";
 import helpMessage from "./help";
 import clipboard from "clipboardy";
@@ -11,7 +11,6 @@ import sendEvent from "./analytics";
 program
     .option("-v, --version", "Print the CurlGPT version")
     .option("-s, --set-apiKey <apiKey>", "Set Openai's Api Key")
-    .option("-t, --trial", "Setup free trial")
     .option("-f, --feedback", "Get the feeback link")
     .configureHelp({ formatHelp: () => helpMessage });
 
