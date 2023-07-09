@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import getCommand from "./openai";
+import getCommand from "./prompt";
 import { setApiKey } from "./configuration";
 import chalk from "chalk";
 import helpMessage from "./help";
 import clipboard from "clipboardy";
-import sendEvent from "./analytics";
 
 program
     .option("-v, --version", "Print the CurlGPT version")
@@ -26,7 +25,6 @@ const handleOption = async (input: string[]) => {
         const apiKey = program.getOptionValue("setApiKey");
         try {
             setApiKey(apiKey);
-            await sendEvent("APIKey");
         } catch (error: any) {
             console.error(chalk.red.bold("Error:"), chalk.red(error.message));
             process.exit(1);
@@ -56,7 +54,6 @@ program.description("Enter the prompt for CurlGPT").action(async () => {
             clipboard.writeSync(command);
             console.log(command);
         }
-        await sendEvent("Prompt");
     } catch (error: any) {
         console.error(chalk.red.bold("Error:"), chalk.red(error.message));
         process.exit(1);
