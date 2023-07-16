@@ -44,5 +44,8 @@
     },
     "overrides": {
         "semver": "^5.7.2"
+    },
+    "resolutions": {
+        "semver": "^5.7.2"
     }
 }
