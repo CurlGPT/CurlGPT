@@ -9,7 +9,8 @@
     },
     "scripts": {
         "start": "tsx src/index.ts",
-        "build": "tsup"
+        "build": "tsup",
+        "release": "yarn build && changeset publish"
     },
     "repository": {
         "type": "git",
