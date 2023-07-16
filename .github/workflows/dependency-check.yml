@@ -8,10 +8,19 @@ jobs:
     security:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - name: install dependencies
-              run: npm ci
-            - uses: oke-py/npm-audit-action@v2
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16.x
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run npm audit
+              uses: oke-py/npm-audit-action@v2
               with:
                   audit_level: moderate
                   github_token: ${{ secrets.GITHUB_TOKEN }}
