@@ -29,5 +29,18 @@ jobs:
             - name: Install dependencies
               run: yarn install --frozen-lockfile
 
-            - name: Check for Vulnerabilites
-              run: yarn audit
+            - name: Run Yarn audit
+              id: yarn-audit
+              run: |
+                  auditReport=$(yarn audit --json)
+                  echo "$auditReport" > audit-report.json
+
+            - name: Check for Vulnerabilities
+              run: |
+                  severityLevel=$(cat audit-report.json | jq '.data.vulnerabilities[].severity | select(. > 7)')
+                  if [ -n "$severityLevel" ]; then
+                    echo "Vulnerabilities with severity above 7 found. Failing the job."
+                    exit 1
+                  else
+                    echo "No vulnerabilities with severity above 7 found."
+                  fi
