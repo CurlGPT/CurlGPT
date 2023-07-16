@@ -1,0 +1,38 @@
+name: Publish
+on:
+    workflow_run:
+        workflows: ["Dependency Checker & Build CI"]
+        types:
+            - completed
+    push:
+        branches:
+            - "main"
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+    publish:
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16.x
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Create Release Pull Request or Publish
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: yarn release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
