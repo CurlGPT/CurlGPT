@@ -5,7 +5,7 @@ on:
             - "**"
 
 jobs:
-    security:
+    dependency-check:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -26,6 +26,7 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   issue_labels: vulnerability
                   dedupe_issues: true
+
     build:
         runs-on: ubuntu-latest
         steps:
@@ -40,6 +41,5 @@ jobs:
             - name: Install dependencies
               run: yarn install --frozen-lockfile
 
-            - name: Run Yarn audit
-              id: yarn-audit
-              run: yarn audit --level high
+            - name: Build the code
+              run: yarn build
