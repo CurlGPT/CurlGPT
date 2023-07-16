@@ -1,11 +1,11 @@
-import { getApiKey } from "./configuration";
+import { getApiKey, updatePromptCount } from "./configuration";
 import axios from "axios";
 import ora from "ora";
 
 const getCommand = async (prompt: string) => {
     let apiKey;
     try {
-        apiKey = await getApiKey();
+        apiKey = getApiKey();
     } catch (error) {
         throw error;
     }
@@ -29,7 +29,9 @@ const getCommand = async (prompt: string) => {
             { headers }
         );
         spinner.stop();
-        return response.data.command;
+        const { command, usageCount } = response.data.data;
+        updatePromptCount(usageCount);
+        return command;
     } catch (error: any) {
         spinner.stop();
         throw new Error(error.response.data.error);

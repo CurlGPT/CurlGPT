@@ -17,3 +17,11 @@ export class InvalidAPIKeyError extends Error {
         super(message);
     }
 }
+
+export class UsageLimitExceededError extends Error {
+    constructor() {
+        const message =
+            "Usage limit exceeded. You have reached the maximum limit of 500 prompts. Please contact the administrator for further assistance";
+        super(message);
+    }
+}

@@ -17,7 +17,6 @@
 -   Get accurate command for the prompt
 -   Auto Copy the outputted command to clipboard
 -   Easy-to-use command-line interface
--   Support for setting an API key for accessing OpenAI's API 🔑
 
 ## Installation 🛠️
 
@@ -30,8 +29,8 @@
 
 ## Usage 🚀
 
-1. Create an [OpenAI's API Key](https://platform.openai.com) if you have not already created it.
-2. Set your OpenAI API key using the **--set-apiKey** option:
+1. Sign into [CurlGPT's API Key](https://curlgpt.vercel.app/) to obtain your API key.
+2. Set your CurlGPT's API key using the **--set-apiKey** option:
 
     ```shell
     curlgpt --set-apiKey <your-api-key>
@@ -73,7 +72,7 @@ Contributions are welcome! If you find a bug, have a feature request, or want to
         yarn start -v
     ```
 
-> Note: you will require OpenAI's API Key to test the prompt in local
+> Note: you will require CurlGPT's API Key to test the prompt in local
 
 ## License 📝
 
