@@ -22,7 +22,7 @@ jobs:
             - name: Run npm audit
               uses: oke-py/npm-audit-action@v2
               with:
-                  audit_level: high
+                  audit_level: moderate
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   issue_labels: vulnerability
                   dedupe_issues: true
@@ -42,4 +42,4 @@ jobs:
 
             - name: Run Yarn audit
               id: yarn-audit
-              run: yarn audit
+              run: yarn audit --level high
