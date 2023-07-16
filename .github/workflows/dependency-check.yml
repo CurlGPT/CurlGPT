@@ -22,10 +22,9 @@ jobs:
             - name: Run npm audit
               uses: oke-py/npm-audit-action@v2
               with:
-                  audit_level: moderate
+                  audit_level: high
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  issue_assignees: oke-py
-                  issue_labels: vulnerability,test
+                  issue_labels: vulnerability
                   dedupe_issues: true
     build:
         runs-on: ubuntu-latest
