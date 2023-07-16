@@ -1,0 +1,45 @@
+name: Dependency Checker & Build CI
+on:
+    push:
+        branches:
+            - "**"
+
+jobs:
+    dependency-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16.x
+
+            - name: Install dependencies
+              run: npm install --frozen-lockfile
+
+            - name: Run npm audit
+              uses: oke-py/npm-audit-action@v2
+              with:
+                  audit_level: moderate
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  issue_labels: vulnerability
+                  dedupe_issues: true
+
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16.x
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Build the code
+              run: yarn build
