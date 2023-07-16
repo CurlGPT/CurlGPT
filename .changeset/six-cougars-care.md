@@ -1,5 +1,0 @@
----
-"curlgpt": patch
----
-
-update version
