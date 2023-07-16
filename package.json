@@ -42,7 +42,7 @@
         "commander": "^10.0.1",
         "ora": "^6.3.1"
     },
-    "resolutions": {
+    "overrides": {
         "semver": "^5.7.2"
     }
 }
