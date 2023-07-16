@@ -32,8 +32,7 @@ jobs:
             - name: Run Yarn audit
               id: yarn-audit
               run: |
-                  auditReport=$(yarn audit --json)
-                  echo "$auditReport" > audit-report.json
+                  yarn audit --json > audit-report.json
 
             - name: Check for Vulnerabilities
               run: |
