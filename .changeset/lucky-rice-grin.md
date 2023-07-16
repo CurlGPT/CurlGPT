@@ -1,5 +1,0 @@
----
-"curlgpt": patch
----
-
-install ora

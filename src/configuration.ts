@@ -1,7 +1,11 @@
 import * as os from "os";
 import * as fs from "fs";
 import * as path from "path";
-import { ApiKeyNotFoundError, InvalidAPIKeyError } from "./exception";
+import {
+    ApiKeyNotFoundError,
+    InvalidAPIKeyError,
+    UsageLimitExceededError,
+} from "./exception";
 
 const homeDir = os.homedir();
 const configFolderPath = path.join(homeDir, ".curlgpt");
@@ -23,6 +27,7 @@ export const setApiKey = (apiKey: string) => {
 
         configuration = {
             apiKey,
+            promptCount: 0,
         };
     } else {
         const configData = fs.readFileSync(configFilePath, "utf-8");
@@ -32,7 +37,7 @@ export const setApiKey = (apiKey: string) => {
     fs.writeFileSync(configFilePath, JSON.stringify(configuration, null, 4));
 };
 
-export const getApiKey = async () => {
+export const getApiKey = () => {
     if (!fs.existsSync(configFilePath)) {
         throw new ApiKeyNotFoundError();
     }
@@ -49,9 +54,20 @@ export const getApiKey = async () => {
         if (!configuration || typeof configuration.apiKey !== "string") {
             throw new ApiKeyNotFoundError();
         }
+        if (configuration.promptCount >= 500) {
+            throw new UsageLimitExceededError();
+        }
 
         return configuration.apiKey;
     } catch (error) {
         throw error;
     }
+};
+
+export const updatePromptCount = (usageCount: number) => {
+    let configuration;
+    const configData = fs.readFileSync(configFilePath, "utf-8");
+    const exisitingConfiguration = JSON.parse(configData);
+    configuration = { ...exisitingConfiguration, usageCount };
+    fs.writeFileSync(configFilePath, JSON.stringify(configuration, null, 4));
 };
