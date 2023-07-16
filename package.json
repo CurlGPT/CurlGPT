@@ -42,5 +42,11 @@
         "clipboardy": "^3.0.0",
         "commander": "^10.0.1",
         "ora": "^6.3.1"
+    },
+    "overrides": {
+        "semver": "^5.7.2"
+    },
+    "resolutions": {
+        "semver": "^5.7.2"
     }
 }
