@@ -1,7 +1,7 @@
 <h1 align="center">CurlGPT 👋</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Latest%20Version-0.5.1-brightgreen" alt="Latest Version">
+  <img src="https://img.shields.io/badge/Latest%20Version-0.6.0-brightgreen" alt="Latest Version">
 </p>
 
 <p align="center">CurlGPT is a command-line tool that brings the power of OpenAI's ChatGPT to your favorite terminal. It allows you to type the prompt and the command line will output the proper command. 💬🚀</p>
