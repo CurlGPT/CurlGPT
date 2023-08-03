@@ -10,7 +10,6 @@ import clipboard from "clipboardy";
 program
     .option("-v, --version", "Print the CurlGPT version")
     .option("-s, --set-apiKey <apiKey>", "Set CurlGPT's Api Key")
-    .option("-f, --feedback", "Get the feeback link")
     .configureHelp({ formatHelp: () => helpMessage });
 
 const handleOption = async (input: string[]) => {
@@ -18,7 +17,7 @@ const handleOption = async (input: string[]) => {
 
     const options = program.opts();
     if (options.version) {
-        console.log(chalk.green("Version: 0.6.1"));
+        console.log(chalk.green("Version: 0.7.0"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");
@@ -29,13 +28,6 @@ const handleOption = async (input: string[]) => {
             process.exit(1);
         }
         console.log(chalk.green("🎉 Successfully set the API Key!"));
-        process.exit(0);
-    } else if (options.feedback) {
-        console.log(
-            `Use the following link to provide your feedback: ${chalk.blue.underline(
-                "https://forms.gle/AQpsMxTar7FpdouT7"
-            )}`
-        );
         process.exit(0);
     } else if (options.help || input.length < 3 || input[2]?.startsWith("-")) {
         program.help();
