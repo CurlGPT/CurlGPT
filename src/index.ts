@@ -17,7 +17,7 @@ const handleOption = async (input: string[]) => {
 
     const options = program.opts();
     if (options.version) {
-        console.log(chalk.green("Version: 0.7.0"));
+        console.log(chalk.green("Version: 1.0.1"));
         process.exit(0);
     } else if (options.setApiKey) {
         const apiKey = program.getOptionValue("setApiKey");
