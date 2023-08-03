@@ -1,5 +1,0 @@
----
-"curlgpt": major
----
-
-Openai apikey

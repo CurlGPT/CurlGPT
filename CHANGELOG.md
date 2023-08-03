@@ -1,5 +1,11 @@
 # curlgpt
 
+## 1.0.0
+
+### Major Changes
+
+- 65226c9: Openai apikey
+
 ## 0.6.1
 
 ### Patch Changes
